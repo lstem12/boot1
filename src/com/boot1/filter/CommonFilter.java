@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CommonFilter implements Filter {
 
     public CommonFilter() {
-    	System.out.println("1");
     }
 
 	public void destroy() {
@@ -24,13 +23,11 @@ public class CommonFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		String uri = req.getRequestURI();
 		if(!uri.startsWith("/ajax")) {
-			System.out.println("3");
 		}
 		chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("2");
 	}
 
 }

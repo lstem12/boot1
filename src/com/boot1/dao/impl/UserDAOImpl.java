@@ -27,7 +27,6 @@ public class UserDAOImpl implements UserDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				Map<String,Object> rMap = new HashMap<>();
-				rMap.put("ui_num", rs.getInt("ui_num"));
 				rMap.put("ui_name", rs.getString("ui_name"));
 				rMap.put("ui_age", rs.getInt("ui_age"));
 				rMap.put("ui_birth", rs.getString("ui_birth"));

@@ -81,7 +81,16 @@
 				method : 'POST',
 				url : '/ajax/user',
 				data : JSON.stringify(param),
-				contentType:'application/json'
+				contentType:'application/json',
+				success : function(res){
+					if(res.rMap){
+						alert(res.msg);
+						location.href = res.url;
+					}else{
+						alert(res.msg);
+						location.href = res.url;
+					}
+				}
 			});
 		}
 			
