@@ -22,7 +22,6 @@
 							placeholder="Type your Id"> <span
 							class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Password</span> <input
@@ -30,7 +29,6 @@
 							id="ui_password" placeholder="Type your password"> <span
 							class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Name</span> <input
@@ -38,7 +36,6 @@
 							placeholder="Type your name"> <span
 							class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Birth</span> <input
@@ -46,7 +43,6 @@
 							placeholder="Type your birth"> <span
 							class="focus-input100" data-symbol="&#x212C;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Age</span> <input
@@ -54,7 +50,6 @@
 							placeholder="Type your age"> <span class="focus-input100"
 							data-symbol="&#xf206;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Phone</span> <input
@@ -62,7 +57,6 @@
 							placeholder="Type your phone"> <span
 							class="focus-input100" data-symbol="&#x260F;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Email</span> <input
@@ -70,15 +64,13 @@
 							placeholder="Type your email"> <span
 							class="focus-input100" data-symbol="&#x40;"></span>
 					</div>
-
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User NickName</span> <input
 							class="input100" type="text" name="ui_nickName" id="ui_nickName"
 							placeholder="Type your nickName"> <span
 							class="focus-input100" data-symbol="&#xf206;"></span>
-					</div>
-					<br>
+					</div><br>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
