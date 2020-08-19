@@ -1,29 +1,70 @@
 package com.boot1.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import com.boot1.dao.UserDAO;
 import com.boot1.dao.impl.UserDAOImpl;
 import com.boot1.service.UserService;
+import com.boot1.servlet.InitServlet;
+import com.boot1.vo.UserInfoVO;
 
 public class UserServiceImpl implements UserService {
 	private UserDAO userDAO = new UserDAOImpl();
-
 	@Override
-	public Map<String, Object> userServiceLogin(Map<String, String> user) {
-		Map<String, Object> rMap = new HashMap<>();
-		Map<String, Object> tmpUser = userDAO.userDAOLogin(user);
-		rMap.put("result", "fail");
-		rMap.put("msg", "아이디랑 비밀번호를 확인해주세요.");
-		rMap.put("url", "/views/user/login");
-		if (tmpUser != null) {
-				rMap.put("result", "success");
-				rMap.put("msg", "로그인완료");
-				rMap.put("ui_id", tmpUser.get("ui_id"));
-				rMap.put("url", "/");
-		}
-		return rMap;
+	public int insertUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
+	@Override
+	public int deleteUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public UserInfoVO selectUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public UserInfoVO selectUserForLogin(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserInfoVO> selectUserList(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean doLogin(UserInfoVO user, HttpSession hs) {
+		user = userDAO.selectUserForLogin(user);
+		if(user!=null) {
+			hs.setAttribute("user", user);
+			return true;
+		}
+		return false;
+	}
+	public static void main(String[] args) {
+		InitServlet is = new InitServlet();
+		is.init();
+		UserService userServiceImpl = new UserServiceImpl();
+		UserInfoVO userInfoVO = new UserInfoVO();
+		userInfoVO.setUi_id("dkdk");
+		userInfoVO.setUi_password("dkdkd");
+		
+		boolean isLogin = userServiceImpl.doLogin(userInfoVO,null);
+		System.out.println(isLogin);
+	}
 }

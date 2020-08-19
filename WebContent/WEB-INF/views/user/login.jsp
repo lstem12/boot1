@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jspf"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,8 +58,8 @@
 					</div>
 
 					<div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17"> Or Sign Up Using </span> <a href="#"
-							class="txt2"> Sign Up </a>
+						<span class="txt1 p-b-17"> Or Sign Up Using </span> 
+						<a href="/views/user/sign-up" class="txt2"> Sign Up </a>
 					</div>
 				</form>
 			</div>
@@ -83,12 +82,11 @@
 				data : JSON.stringify(param),
 				contentType:'application/json',
 				success : function(res){
-					if(res.rMap){
-						alert(res.msg);
-						location.href = res.url;
+					if(res.result){
+						alert("로그인성공");
+						location.href = "/";
 					}else{
-						alert(res.msg);
-						location.href = res.url;
+						alert("아이디랑 비밀번호를 확인해주세요");
 					}
 				}
 			});

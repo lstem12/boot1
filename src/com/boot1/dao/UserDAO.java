@@ -1,7 +1,15 @@
 package com.boot1.dao;
 
-import java.util.Map;
+import java.util.List;
+
+import com.boot1.vo.UserInfoVO;
 
 public interface UserDAO {
-	Map<String,Object> userDAOLogin(Map<String,String> user);
+
+	int insertUser(UserInfoVO user);
+	int deleteUser(UserInfoVO user);
+	int updateUser(UserInfoVO user);
+	UserInfoVO selectUser(UserInfoVO user);
+	UserInfoVO selectUserForLogin(UserInfoVO user);
+	List<UserInfoVO> selectUserList(UserInfoVO user);
 }

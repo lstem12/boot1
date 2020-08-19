@@ -4,47 +4,73 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import com.boot1.dao.UserDAO;
 import com.boot1.servlet.InitServlet;
+import com.boot1.vo.UserInfoVO;
 
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public Map<String, Object> userDAOLogin(Map<String, String> user) {
+	public int insertUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public UserInfoVO selectUser(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserInfoVO> selectUserList(UserInfoVO user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserInfoVO selectUserForLogin(UserInfoVO user) {
+		String sql = "select * from user_info where ui_id=? and ui_password=?";
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			con = InitServlet.getConnection();
-			String sql = "select ui_num, ui_name, ui_age, ui_birth, ui_id, ui_password, ui_phone, "
-					+ "ui_email, ui_credat, ui_nickname from user_info where ui_id=? and ui_password=?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, user.get("ui_id"));
-			ps.setString(2, user.get("ui_password"));
+			ps.setString(1, user.getUi_id());
+			ps.setString(2, user.getUi_password());
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				Map<String,Object> rMap = new HashMap<>();
-				rMap.put("ui_name", rs.getString("ui_name"));
-				rMap.put("ui_age", rs.getInt("ui_age"));
-				rMap.put("ui_birth", rs.getString("ui_birth"));
-				rMap.put("ui_id", rs.getString("ui_id"));
-				rMap.put("ui_phone", rs.getString("ui_phone"));
-				rMap.put("ui_email", rs.getString("ui_email"));
-				rMap.put("ui_credat", rs.getString("ui_credat"));
-				rMap.put("ui_nickname", rs.getString("ui_nickname"));
-				return rMap;				
+				UserInfoVO ui = new UserInfoVO();
+				ui.setUi_num(rs.getInt("ui_num"));
+				ui.setUi_age(rs.getInt("ui_age"));
+				ui.setUi_name(rs.getString("ui_name"));
+				ui.setUi_birth(rs.getString("ui_birth"));
+				ui.setUi_id(rs.getString("ui_id"));
+				ui.setUi_phone(rs.getString("ui_phone"));
+				ui.setUi_email(rs.getString("ui_email"));
+				ui.setUi_credat(rs.getString("ui_credat"));
+				ui.setUi_nickname(rs.getString("ui_nickname"));
+				return ui;
 			}
-		} catch (SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				InitServlet.close(rs, ps, con);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		}finally {
+			InitServlet.close(rs, ps, con);
 		}
 		return null;
 	}
