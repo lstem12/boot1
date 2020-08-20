@@ -19,7 +19,7 @@
 						data-validate="UserID is reauired">
 						<span class="label-input100">User ID</span> <input
 							class="input100" type="text" name="ui_id" id="ui_id"
-							placeholder="Type your Id" value="${user.ui_id}"> <button type="button" onclick="checkId()">중복확인</button> <span
+							placeholder="Type your Id" value="${user.ui_id}"><span
 							class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					<div class="wrap-input100 validate-input"

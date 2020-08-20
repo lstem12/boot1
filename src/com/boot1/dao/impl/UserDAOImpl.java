@@ -104,7 +104,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public UserInfoVO selecUserCheckId(UserInfoVO user) {
-		String sql = "select * from user_info where ui_id=?";
+		String sql = "select ui_id from user_info where ui_id=?";
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -116,6 +116,30 @@ public class UserDAOImpl implements UserDAO {
 			if(rs.next()) {
 				UserInfoVO ui = new UserInfoVO();
 				ui.setUi_id(rs.getString("ui_id"));
+				return ui;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			InitServlet.close(rs, ps, con);
+		}
+		return null;
+	}
+
+	@Override
+	public UserInfoVO selecUserCheckNickName(UserInfoVO user) {
+		String sql = "select ui_nickname from user_info where ui_nickname=?";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = InitServlet.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.getUi_nickname());
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				UserInfoVO ui = new UserInfoVO();
+				ui.setUi_nickname(rs.getString("ui_nickname"));
 				return ui;
 			}
 		}catch(SQLException e) {

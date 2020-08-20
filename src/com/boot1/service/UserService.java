@@ -15,4 +15,5 @@ public interface UserService {
 	boolean doLogin(UserInfoVO user, HttpSession hs);
 	List<UserInfoVO> selectUserList(UserInfoVO user);
 	boolean checkId(UserInfoVO user);
+	boolean checkNickName(UserInfoVO user);
 }

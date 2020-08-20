@@ -70,6 +70,13 @@
 		function doLogin() {
 			var uiId = $('#ui_id').val();
 			var uiPassword = $('#ui_password').val();
+			if(uiId == null || uiId.trim().length<4 || uiId.trim().length>20){
+				alert('아이디는 4글자이상 20글자 이하로 작성해주세요.');
+				return;
+			}else if(uiPassword == null || uiPassword.trim().length<4 || uiPassword.trim().length>20){
+				alert('비밀번호는 4글자이상 20글자 이하로 작성해주세요.');
+				return;
+			}
 			var cmd = 'login';
 			var param = {
 				ui_id : uiId,

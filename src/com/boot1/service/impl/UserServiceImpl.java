@@ -68,6 +68,15 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 	
+	@Override
+	public boolean checkNickName(UserInfoVO user) {
+		user = userDAO.selecUserCheckNickName(user);
+		if(user!=null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		InitServlet is = new InitServlet();
 		is.init();
@@ -78,4 +87,5 @@ public class UserServiceImpl implements UserService {
 		boolean check = userService.checkId(userInfoVO);
 		System.out.println(check);
 	}
+
 }

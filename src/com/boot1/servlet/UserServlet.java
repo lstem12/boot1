@@ -35,6 +35,13 @@ public class UserServlet extends HttpServlet {
 			result.put("result", userService.checkId(userInfoVO));
 			pw.println(gson.toJson(result));		
 		}
+		if("checkNickName".equals(cmd)) {
+			String uiNickName = request.getParameter("ui_nickname");
+			userInfoVO.setUi_nickname(uiNickName);
+			Map<String,Object> result = new HashMap<>();
+			result.put("result", userService.checkNickName(userInfoVO));
+			pw.println(gson.toJson(result));		
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
