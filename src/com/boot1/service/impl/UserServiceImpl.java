@@ -13,9 +13,11 @@ import com.boot1.vo.UserInfoVO;
 public class UserServiceImpl implements UserService {
 	private UserDAO userDAO = new UserDAOImpl();
 	@Override
-	public int insertUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertUser(UserInfoVO user) {	
+		if(userDAO.selecUserCheckId(user)!=null) {
+			return -1;
+		}
+		return userDAO.insertUser(user);
 	}
 
 	@Override
@@ -56,15 +58,24 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean checkId(UserInfoVO user) {
+		user = userDAO.selecUserCheckId(user);
+		if(user!=null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		InitServlet is = new InitServlet();
 		is.init();
-		UserService userServiceImpl = new UserServiceImpl();
+		UserService userService = new UserServiceImpl();
 		UserInfoVO userInfoVO = new UserInfoVO();
 		userInfoVO.setUi_id("dkdk");
-		userInfoVO.setUi_password("dkdkd");
 		
-		boolean isLogin = userServiceImpl.doLogin(userInfoVO,null);
-		System.out.println(isLogin);
+		boolean check = userService.checkId(userInfoVO);
+		System.out.println(check);
 	}
 }

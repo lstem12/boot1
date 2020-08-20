@@ -22,16 +22,23 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 	private UserService userService = new UserServiceImpl();
+	private UserInfoVO userInfoVO = new UserInfoVO();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+			throws ServletException, IOException {	
+		String cmd = request.getParameter("cmd");
+		PrintWriter pw = response.getWriter();
+		if("checkId".equals(cmd)) {
+			String uiId = request.getParameter("ui_id");
+			userInfoVO.setUi_id(uiId);
+			Map<String,Object> result = new HashMap<>();
+			result.put("result", userService.checkId(userInfoVO));
+			pw.println(gson.toJson(result));		
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		BufferedReader br = request.getReader();
 		String str;
 		StringBuffer sb = new StringBuffer();
@@ -40,10 +47,17 @@ public class UserServlet extends HttpServlet {
 		}
 		UserInfoVO user = gson.fromJson(sb.toString(), UserInfoVO.class);
 		Map<String,Object> result = new HashMap<>();
-		result.put("result", userService.doLogin(user, request.getSession()));
+		
+		if("login".equals(user.getCmd())) {
+			result.put("result", userService.doLogin(user, request.getSession()));
+		}else if("signup".equals(user.getCmd())) {
+			result.put("result", userService.insertUser(user));
+		}else if("logout".equals(user.getCmd())) {
+			request.getSession().invalidate();
+			result.put("result", true);
+		}
 		String json = gson.toJson(result);
 		PrintWriter pw = response.getWriter();
-		pw.println(json);
-
+		pw.println(json);		
 	}
 }

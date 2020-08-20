@@ -14,4 +14,5 @@ public interface UserService {
 	UserInfoVO selectUser(UserInfoVO user);
 	boolean doLogin(UserInfoVO user, HttpSession hs);
 	List<UserInfoVO> selectUserList(UserInfoVO user);
+	boolean checkId(UserInfoVO user);
 }
