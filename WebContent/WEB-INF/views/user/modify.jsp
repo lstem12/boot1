@@ -13,21 +13,24 @@
 			style="background-image: url('/res/images/abc123.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-49"> SIGN UP </span>
+					<input type="hidden" name="ui_num" id="ui_num"
+						value="${user.ui_num}"> <span
+						class="login100-form-title p-b-49"> SIGN UP </span>
 
 					<div class="wrap-input100 validate-input m-b-23"
 						data-validate="UserID is reauired">
 						<span class="label-input100">User ID</span> <input
 							class="input100" type="text" name="ui_id" id="ui_id"
-							placeholder="Type your Id" value="${user.ui_id}"><span
+							placeholder="Type your Id" value="${user.ui_id}" disabled><span
 							class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
 						<span class="label-input100">User Password</span> <input
 							class="input100" type="password" name="ui_password"
-							id="ui_password" placeholder="Type your password" value="${user.ui_password}"> <span
-							class="focus-input100" data-symbol="&#xf190;"></span>
+							id="ui_password" placeholder="Type your password"
+							value="${user.ui_password}"> <span class="focus-input100"
+							data-symbol="&#xf190;"></span>
 					</div>
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
@@ -47,8 +50,8 @@
 						data-validate="Password is required">
 						<span class="label-input100">User Age</span> <input
 							class="input100" type="number" name="ui_age" id="ui_age"
-							placeholder="Type your age" value="${user.ui_age}"> <span class="focus-input100"
-							data-symbol="&#xf206;"></span>
+							placeholder="Type your age" value="${user.ui_age}"> <span
+							class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					<div class="wrap-input100 validate-input"
 						data-validate="Password is required">
@@ -68,61 +71,63 @@
 						data-validate="Password is required">
 						<span class="label-input100">User NickName</span> <input
 							class="input100" type="text" name="ui_nickname" id="ui_nickname"
-							placeholder="Type your nickName" value="${user.ui_nickname}"> <span
-							class="focus-input100" data-symbol="&#xf206;"></span>
-					</div><br>
+							placeholder="Type your nickName" value="${user.ui_nickname}">
+						<span class="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+					<br>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button type="button" class="login100-form-btn"
-								onclick="doSignUp()">회원가입</button>
+								onclick="doModify()">회원수정</button>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<div id="dropDownSelect1"></div>
-<script>
-function doSignUp(){
-	var els = document.querySelectorAll('input');
-	var params = {};
-	for(var i=0;i<els.length;i++){
-		var el = els[i];
-		params[el.name] = el.value;
-	}
-	params.cmd = 'signup';
-	$.ajax({
-		url : '/ajax/user',
-		method : 'POST',
-		data : JSON.stringify(params),
-		contentType : 'application/json',
-		sucess : function(res){
-			if(res.result===1){
-				alert('회원가입 성공');
-			}else{
-				alert("가입 실패");
+
+	<script>
+		function doModify() {
+			var els = document.querySelectorAll('input');
+			var params = {};
+			for (var i = 0; i < els.length; i++) {
+				var el = els[i];
+				params[el.name] = el.value;
 			}
+			params.cmd = 'modify';
+			$.ajax({
+				url : '/ajax/user',
+				method : 'POST',
+				data : JSON.stringify(params),
+				contentType : 'application/json',
+				success : function(res) {
+					if (res.result === 1) {
+						alert('회원수정 성공');
+						location.href = '/';
+					} else {
+						alert("회원수정 실패");
+					}
+				}
+
+			});
 		}
-		
-	});
-}
-function checkId(){
-	var uiId = $('#ui_id').val();
-	var cmd = "checkId";
-	$.ajax({
-		method : 'GET',
-		url : '/ajax/user?ui_id='+uiId +'&cmd='+cmd,
-		success : function(res){
-			if(res.result){
-				alert("이미 있는 아이디입니다.");
-			}else{
-				alert("가입 가능한 아이디입니다.");
-			}
+		function checkId() {
+			var uiId = $('#ui_id').val();
+			var cmd = "checkId";
+			$.ajax({
+				method : 'GET',
+				url : '/ajax/user?ui_id=' + uiId + '&cmd=' + cmd,
+				success : function(res) {
+					if (res.result) {
+						alert("이미 있는 아이디입니다.");
+					} else {
+						alert("가입 가능한 아이디입니다.");
+					}
+				}
+			});
+
 		}
-	});
-	
-}
-</script>
+	</script>
 </body>
 </html>

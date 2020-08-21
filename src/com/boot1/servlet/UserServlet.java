@@ -62,6 +62,10 @@ public class UserServlet extends HttpServlet {
 		}else if("logout".equals(user.getCmd())) {
 			request.getSession().invalidate();
 			result.put("result", true);
+		}else if("modify".equals(user.getCmd())) {
+			result.put("result", userService.updateUser(user, request.getSession()));
+		}else if("delete".equals(user.getCmd())) {
+			result.put("result", userService.deleteUser(user, request.getSession()));
 		}
 		String json = gson.toJson(result);
 		PrintWriter pw = response.getWriter();

@@ -46,19 +46,94 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int deleteUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = InitServlet.getConnection();
+			String sql = "delete from user_info where ui_num=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getUi_num());
+			int result = ps.executeUpdate();
+			con.commit();
+			return result;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			InitServlet.close(ps, con);
+		}
 		return 0;
 	}
 
 	@Override
 	public int updateUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = InitServlet.getConnection();
+			String sql = "update user_info\r\n" + 
+					"set \r\n" + 
+					"ui_name=?,\r\n" + 
+					"ui_age = ?,\r\n" + 
+					"ui_birth = ?,\r\n" + 
+					"UI_PASSWORD = ?,\r\n" + 
+					"ui_phone = ?,\r\n" + 
+					"ui_email = ?,\r\n" + 
+					"ui_nickname = ?\r\n" + 
+					"where ui_num = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user.getUi_name());
+			ps.setInt(2, user.getUi_age());
+			ps.setString(3, user.getUi_birth());
+			ps.setString(4, user.getUi_password());
+			ps.setString(5, user.getUi_phone());
+			ps.setString(6, user.getUi_email());
+			ps.setString(7, user.getUi_nickname());
+			ps.setInt(8, user.getUi_num());
+			int result = ps.executeUpdate();
+			con.commit();
+			return result;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			InitServlet.close(ps, con);
+		}
+		
 		return 0;
 	}
 
 	@Override
 	public UserInfoVO selectUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
+
+		String sql = "select ui_num, ui_name, ui_age, ui_birth, ui_id, "
+				+ "ui_password, ui_phone, ui_email, ui_credat, ui_nickname, ui_admin "
+				+ "from user_info where ui_num=?";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = InitServlet.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getUi_num());
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				UserInfoVO ui = new UserInfoVO();
+				ui.setUi_num(rs.getInt("ui_num"));
+				ui.setUi_age(rs.getInt("ui_age"));
+				ui.setUi_name(rs.getString("ui_name"));
+				ui.setUi_birth(rs.getString("ui_birth"));
+				ui.setUi_id(rs.getString("ui_id"));
+				ui.setUi_phone(rs.getString("ui_phone"));
+				ui.setUi_email(rs.getString("ui_email"));
+				ui.setUi_credat(rs.getString("ui_credat"));
+				ui.setUi_nickname(rs.getString("ui_nickname"));
+				ui.setUi_admin(rs.getString("ui_admin"));
+				return ui;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			InitServlet.close(rs, ps, con);
+		}
 		return null;
 	}
 
@@ -87,11 +162,11 @@ public class UserDAOImpl implements UserDAO {
 				ui.setUi_name(rs.getString("ui_name"));
 				ui.setUi_birth(rs.getString("ui_birth"));
 				ui.setUi_id(rs.getString("ui_id"));
-				ui.setUi_password(rs.getString("ui_password"));
 				ui.setUi_phone(rs.getString("ui_phone"));
 				ui.setUi_email(rs.getString("ui_email"));
 				ui.setUi_credat(rs.getString("ui_credat"));
 				ui.setUi_nickname(rs.getString("ui_nickname"));
+				ui.setUi_admin(rs.getString("ui_admin"));
 				return ui;
 			}
 		}catch(SQLException e) {

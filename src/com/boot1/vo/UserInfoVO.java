@@ -15,5 +15,6 @@ public class UserInfoVO {
 	private String ui_email;
 	private String ui_credat;
 	private String ui_nickname;
+	private String ui_admin;
 	
 }

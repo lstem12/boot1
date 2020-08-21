@@ -8,10 +8,15 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
+<input type="hidden" name="ui_num" id="ui_num" value="${user.ui_num}">
 <div class="container">
-	${sessionScope.user.ui_name} 님 반갑습니다.
+	${sessionScope.user.ui_name} 님 반갑습니다.<br>
+	<c:if test="${sessionScope.user.ui_admin == '1'}">
+		<a href="/views/user/list"><button class="btn btn-info">유저리스트</button></a>
+	</c:if>
 	<button class="btn btn-info" onclick="doLogout()">로그아웃</button>
 	<a href="/views/user/modify"><button class="btn btn-info">정보수정</button></a>
+	<button class="btn btn-info" onclick="doDelete()">회원탈퇴</button>
 </div>
 <script>
 function doLogout(){
@@ -24,6 +29,25 @@ function doLogout(){
 			if(res.result){
 				alert('로그아웃 되었습니다.');
 				location.href='/views/user/login';
+			}
+		}
+	})
+}
+function doDelete(){
+	var uiNum = document.querySelector('#ui_num').value;
+	var params = {};
+	params.cmd = 'delete';
+	params.ui_num = uiNum;
+	$.ajax({
+		url:'/ajax/user',
+		method:'POST',
+		data:JSON.stringify(params),
+		success : function(res){
+			if(res.result === 1){
+				alert('회원이탈퇴 되었습니다.');
+				location.href='/views/user/login';
+			}else {
+				alert('이미 탈퇴된 회원입니다.');
 			}
 		}
 	})

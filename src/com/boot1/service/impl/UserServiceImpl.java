@@ -22,21 +22,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
+	public int deleteUser(UserInfoVO user, HttpSession hs) {
+		int cnt = userDAO.deleteUser(user);
+		if(cnt==1) {
+			hs.invalidate();
+			return cnt;
+		}
 		return 0;
 	}
 
 	@Override
-	public int updateUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateUser(UserInfoVO user, HttpSession hs) {
+		int cnt = userDAO.updateUser(user);
+		if(cnt==1) {
+			hs.setAttribute("user", userDAO.selectUser(user));
+		}
+		return cnt;
 	}
 
 	@Override
 	public UserInfoVO selectUser(UserInfoVO user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDAO.selectUser(user);
 	}
 
 	public UserInfoVO selectUserForLogin(UserInfoVO user) {
