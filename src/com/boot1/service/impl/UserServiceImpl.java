@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.boot1.dao.UserDAO;
 import com.boot1.dao.impl.UserDAOImpl;
+import com.boot1.listener.SessionListener;
 import com.boot1.service.UserService;
 import com.boot1.servlet.InitServlet;
 import com.boot1.vo.UserInfoVO;
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService {
 	public boolean doLogin(UserInfoVO user, HttpSession hs) {
 		user = userDAO.selectUserForLogin(user);
 		if(user!=null) {
+			SessionListener.checkUserId(user.getUi_id());
 			hs.setAttribute("user", user);
 			return true;
 		}
