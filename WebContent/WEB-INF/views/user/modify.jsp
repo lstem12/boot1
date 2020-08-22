@@ -15,7 +15,7 @@
 				<form class="login100-form validate-form">
 					<input type="hidden" name="ui_num" id="ui_num"
 						value="${user.ui_num}"> <span
-						class="login100-form-title p-b-49"> SIGN UP </span>
+						class="login100-form-title p-b-49"> 유저정보수정 </span>
 
 					<div class="wrap-input100 validate-input m-b-23"
 						data-validate="UserID is reauired">

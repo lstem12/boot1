@@ -162,6 +162,7 @@ public class UserDAOImpl implements UserDAO {
 				ui.setUi_name(rs.getString("ui_name"));
 				ui.setUi_birth(rs.getString("ui_birth"));
 				ui.setUi_id(rs.getString("ui_id"));
+				ui.setUi_password(rs.getString("ui_password"));
 				ui.setUi_phone(rs.getString("ui_phone"));
 				ui.setUi_email(rs.getString("ui_email"));
 				ui.setUi_credat(rs.getString("ui_credat"));
