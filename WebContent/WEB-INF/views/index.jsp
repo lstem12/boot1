@@ -9,7 +9,6 @@
 </head>
 <body>
 	<input type="hidden" name="ui_num" id="ui_num" value="${user.ui_num}">
-	<input type="password" id="ui_password">
 	<div class="container">
 		${sessionScope.user.ui_name} 님 반갑습니다.<br>
 		<c:if test="${sessionScope.user.ui_admin == '1'}">
@@ -21,7 +20,6 @@
 	</div>
 	<script>
 		function doLogout() {
-			alert('로그아웃');
 			$.ajax({
 				url : '/ajax/user',
 				method : 'POST',

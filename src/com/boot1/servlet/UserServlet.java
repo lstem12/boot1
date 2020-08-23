@@ -37,7 +37,7 @@ public class UserServlet extends HttpServlet {
 			userInfoVO.setUi_nickname(uiNickName);
 			result.put("result", userService.checkNickName(userInfoVO));		
 		}else if("list".equals(cmd)) {
-			result.put("result", userService.selectUserList(null));
+			result.put("list", userService.selectUserList(null));
 		}
 		PrintWriter pw = response.getWriter();
 		pw.println(gson.toJson(result));
