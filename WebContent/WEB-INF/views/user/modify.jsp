@@ -29,7 +29,7 @@
 						<span class="label-input100">User Password</span> <input
 							class="input100" type="password" name="ui_password"
 							id="ui_password" placeholder="Type your password"
-							value="${user.ui_password}"> <span class="focus-input100"
+							> <span class="focus-input100"
 							data-symbol="&#xf190;"></span>
 					</div>
 					<div class="wrap-input100 validate-input"

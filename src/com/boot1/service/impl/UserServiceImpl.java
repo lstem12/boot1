@@ -51,15 +51,9 @@ public class UserServiceImpl implements UserService {
 		return userDAO.selectUser(user);
 	}
 
-	public UserInfoVO selectUserForLogin(UserInfoVO user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public List<UserInfoVO> selectUserList(UserInfoVO user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDAO.selectUserList(user);
 	}
 
 	@Override

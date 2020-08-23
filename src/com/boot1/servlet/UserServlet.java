@@ -27,21 +27,20 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
 		String cmd = request.getParameter("cmd");
-		PrintWriter pw = response.getWriter();
+		Map<String,Object> result = new HashMap<>();
 		if("checkId".equals(cmd)) {
 			String uiId = request.getParameter("ui_id");
 			userInfoVO.setUi_id(uiId);
-			Map<String,Object> result = new HashMap<>();
-			result.put("result", userService.checkId(userInfoVO));
-			pw.println(gson.toJson(result));		
-		}
-		if("checkNickName".equals(cmd)) {
+			result.put("result", userService.checkId(userInfoVO));	
+		}else if("checkNickName".equals(cmd)) {
 			String uiNickName = request.getParameter("ui_nickname");
 			userInfoVO.setUi_nickname(uiNickName);
-			Map<String,Object> result = new HashMap<>();
-			result.put("result", userService.checkNickName(userInfoVO));
-			pw.println(gson.toJson(result));		
+			result.put("result", userService.checkNickName(userInfoVO));		
+		}else if("list".equals(cmd)) {
+			result.put("result", userService.selectUserList(null));
 		}
+		PrintWriter pw = response.getWriter();
+		pw.println(gson.toJson(result));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
