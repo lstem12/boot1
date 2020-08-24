@@ -31,7 +31,7 @@ var loadData = function(){
 $(document).ready(loadData);
 </script>
 
-	<table border="1">
+	<table class="table table-bordered">
 		<tr>
 			<th data-col="ui_num">이름</th>
 			<th data-col="ui_age">나이</th>
