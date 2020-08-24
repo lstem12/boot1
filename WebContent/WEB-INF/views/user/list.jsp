@@ -66,11 +66,10 @@ $(document).ready(function(){
 			html+= '</table>';
 			$('#userListDiv').html(html);
 		}
-		
 	})
 })
-function userView(){
-	
+function userView(res){
+	colsole.log(res.list);
 }
 </script>
 <h1>유저리스트</h1><br>
