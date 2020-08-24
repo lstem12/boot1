@@ -140,7 +140,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<UserInfoVO> selectUserList(UserInfoVO user) {
 		String sql = "select ui_num, ui_name, ui_age, ui_birth, ui_id, "
-				+ "ui_password, ui_phone, ui_email, ui_credat, ui_nickname, ui_admin from user_info";
+				+ "ui_phone, ui_email, ui_credat, ui_nickname, ui_admin from user_info";
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -156,7 +156,6 @@ public class UserDAOImpl implements UserDAO {
 				ui.setUi_name(rs.getString("ui_name"));
 				ui.setUi_birth(rs.getString("ui_birth"));
 				ui.setUi_id(rs.getString("ui_id"));
-				ui.setUi_password(rs.getString("ui_password"));
 				ui.setUi_phone(rs.getString("ui_phone"));
 				ui.setUi_email(rs.getString("ui_email"));
 				ui.setUi_credat(rs.getString("ui_credat"));
@@ -256,5 +255,13 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return null;
 	}
-
+	public static void main(String[] args) {
+		InitServlet is = new InitServlet();
+		is.init();
+		UserDAO userDAO = new UserDAOImpl();
+		List<UserInfoVO> userList = new ArrayList<>();
+		
+		userList = userDAO.selectUserList(null);
+		System.out.println(userList);
+	}
 }

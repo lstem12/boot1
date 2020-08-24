@@ -5,26 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-  table , th, td {
-    border: 1px solid #bcbcbc;
-  }
-  table {
-    width: 100%;
-    height: 200px;
-  }
-  #tr01 th {
-  	text-align: center;
-  	font-size: 20px;
-  }
-  #tr02 td {
-  	text-align: center;
-  	font-size: 15px;
-  }
-  h1{
-  	text-align: center;
-  }
-</style>
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
@@ -35,45 +15,38 @@ $(document).ready(function(){
 		method:'GET',
 		data:{cmd:'list'},
 		success:function(res){
-			var html = '<table border="1">';
-			html += '<tr id="tr01">';
-			html += '<th>번호</th>';
-			html += '<th>이름</th>';
-			html += '<th>나이</th>';
-			html += '<th>생년월일</th>';
-			html += '<th>아이디</th>';
-			html += '<th>전화번호</th>';
-			html += '<th>이메일</th>';
-			html += '<th>가입일</th>';
-			html += '<th>닉네임</th>';
-			html += '<th>관리번호</th>';
-			html += '</tr>';
+			var html = '';
 			for(var i=0;i<res.list.length;i++){
 				var user = res.list[i];
-				html += '<tr id="tr02" onclick="userView()">';
-				html += '<td>' + user.ui_num + '</td>';
-				html += '<td>' + user.ui_name + '</td>';
-				html += '<td>' + user.ui_age + '</td>';
-				html += '<td>' + user.ui_birth + '</td>';
-				html += '<td>' + user.ui_id + '</td>';
-				html += '<td>' + user.ui_phone + '</td>';
-				html += '<td>' + user.ui_email + '</td>';
-				html += '<td>' + user.ui_credat + '</td>';
-				html += '<td>' + user.ui_nickname + '</td>';
-				html += '<td>' + user.ui_admin + '</td>';
+				html += '<tr">';
+				$('th[data-col]').each(function(idx,th){
+					var col = th.getAttribute('data-col');
+					html += '<td>' + user[col] +'</td>';
+				})				
 				html += '</tr>';
 			}
-			html+= '</table>';
-			$('#userListDiv').html(html);
+			$('#tBody').html(html);
 		}
 	})
 })
-function userView(res){
-	colsole.log(res.list);
-}
 </script>
 <h1>유저리스트</h1><br>
-<div id="userListDiv"></div><br>
-<a href="/"><button class="btn btn-info">관리자정보화면</button></a>
+	<table class="table table-bordered">
+		<tr>
+			<th data-col="ui_num">번호</th>
+			<th data-col="ui_name">이름</th>
+			<th data-col="ui_age">나이</th>
+			<th data-col="ui_birth">생년월일</th>
+			<th data-col="ui_id">아이디</th>
+			<th data-col="ui_phone">휴대폰번호</th>
+			<th data-col="ui_email">이메일</th>
+			<th data-col="ui_credat">생성일</th>
+			<th data-col="ui_nickname">닉네임</th>
+			<th data-col="ui_admin">관리번호</th>
+		</tr>
+		<tbody id="tBody">
+		</tbody>
+	</table>
+	<a href="/"><button class="btn btn-info">관리자정보화면</button></a>
 </body>
 </html>

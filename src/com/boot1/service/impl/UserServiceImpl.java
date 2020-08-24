@@ -1,5 +1,6 @@
 package com.boot1.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -89,11 +90,10 @@ public class UserServiceImpl implements UserService {
 		InitServlet is = new InitServlet();
 		is.init();
 		UserService userService = new UserServiceImpl();
-		UserInfoVO userInfoVO = new UserInfoVO();
-		userInfoVO.setUi_id("dkdk");
-
-		boolean check = userService.checkId(userInfoVO);
-		System.out.println(check);
+		List<UserInfoVO> userList = new ArrayList<UserInfoVO>();
+		
+		userList = userService.selectUserList(null);
+		System.out.println(userList);
 	}
 
 }
