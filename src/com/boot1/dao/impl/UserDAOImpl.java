@@ -264,4 +264,5 @@ public class UserDAOImpl implements UserDAO {
 		userList = userDAO.selectUserList(null);
 		System.out.println(userList);
 	}
+
 }

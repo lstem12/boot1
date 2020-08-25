@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserInfoVO {
+	private int[] ui_nums;
 	private String cmd;
 	private int ui_num;
 	private String ui_name;

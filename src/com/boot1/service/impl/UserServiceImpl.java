@@ -96,4 +96,14 @@ public class UserServiceImpl implements UserService {
 		System.out.println(userList);
 	}
 
+	@Override
+	public int deleteUsers(int[] ui_nums) {
+		for(int ui_num:ui_nums) {
+			UserInfoVO userInfoVO = new UserInfoVO();
+			userInfoVO.setUi_num(ui_num);
+			userDAO.deleteUser(userInfoVO);
+		}
+		return ui_nums.length;
+	}
+
 }
