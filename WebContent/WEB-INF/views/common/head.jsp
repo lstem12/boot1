@@ -22,3 +22,6 @@
 	<script src="/res/vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="/res/vendor/countdowntime/countdowntime.js"></script>
 	<script src="/res/js/main.js"></script>
+	
+	
+	
