@@ -23,9 +23,9 @@ var corList = [
 var loadData = function(){
 	var html = '';
 	var corSumTotal = 0;
-	var corNewTotal = 0;
-		html += '<tr>';
+	var corNewTotal = 0;		
 	for(var i=0;i<corList.length;i++){
+		html += '<tr>';
 		var corl = corList[i];
 		$('th[data-col]').each(function(idx,th){
 			var col = th.getAttribute('data-col');
