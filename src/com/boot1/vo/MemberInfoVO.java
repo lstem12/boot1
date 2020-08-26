@@ -8,4 +8,7 @@ public class MemberInfoVO {
 	private int miNum;
 	private String miId;
 	private String miName;
+	private int startRowNum;
+	private int endRowNum;
+	private int page;
 }

@@ -40,10 +40,17 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select rownum rnum, mi.* from(select * from member_info order by mi_num desc)mi";
+		String sql = "select * from(select rownum rnum, mi.* from(\r\n" + 
+				"	select * from member_info\r\n" + 
+				"	order by mi_num desc\r\n" + 
+				") mi\r\n" + 
+				"where rownum <=? )\r\n" + 
+				"where rnum>=?";
 		try {
 			con = InitServlet.getConnection();
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, mi.getEndRowNum());
+			ps.setInt(2, mi.getStartRowNum());
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				MemberInfoVO memberInfoVO = new MemberInfoVO();
@@ -65,7 +72,10 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 		InitServlet is = new InitServlet();
 		is.init();
 		MemberInfoDAO memberInfoDAO = new MemberInfoDAOImpl();
-		System.out.println(memberInfoDAO.selectMemberInfoList(null));
+		MemberInfoVO memberInfoVO = new MemberInfoVO();
+		memberInfoVO.setEndRowNum(40);
+		memberInfoVO.setStartRowNum(21);
+		System.out.println(memberInfoDAO.selectMemberInfoList(memberInfoVO));
 		System.out.println(memberInfoDAO.selectTotalCount(null));
 	}
 }
