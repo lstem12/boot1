@@ -1,0 +1,11 @@
+package com.boot1.vo;
+
+import lombok.Data;
+
+@Data
+public class MemberInfoVO {
+	private int rNum;
+	private int miNum;
+	private String miId;
+	private String miName;
+}
