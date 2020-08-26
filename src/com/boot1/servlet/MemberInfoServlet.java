@@ -22,8 +22,10 @@ public class MemberInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String json = request.getParameter("json");
 		MemberInfoVO memberInfoVO = gson.fromJson(json, MemberInfoVO.class);
+		if("list".equals(memberInfoVO.getCmd())) {
+			json = gson.toJson(memberInfoService.selectMemberInfoList(memberInfoVO));
+		}		
 		PrintWriter pw = response.getWriter();
-		json = gson.toJson(memberInfoService.selectMemberInfoList(memberInfoVO));
 		pw.write(json);
 		
 	}

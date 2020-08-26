@@ -11,4 +11,5 @@ public class MemberInfoVO {
 	private int startRowNum;
 	private int endRowNum;
 	private int page;
+	private String cmd;
 }

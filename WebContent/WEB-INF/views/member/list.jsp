@@ -42,7 +42,7 @@ $.ajax({
 	}
 })
 </script>
-<table class="table table-bordered">
+<table class="table table-bordered table-hover">
 	<tr>
 		<th data-col="rNum">번호</th>
 		<th data-col="miNum">맴버번호</th>
