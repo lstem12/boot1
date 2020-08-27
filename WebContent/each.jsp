@@ -16,7 +16,7 @@
 <script>
 	$('button').click(function(){
 		var params ={};
-		#('input[id]').each(function(idx, input){
+		$('input[id]').each(function(idx, input){
 			params[input.id] = input.value;
 		})
 		console.log(params);
